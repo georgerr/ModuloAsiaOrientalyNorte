@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerario Turístico por China — Guía Educativa</title>
+    <style>
+        :root {
+            --chinese-red: #C41E3A;
+            --gold: #D4AF37;
+            --dark-bg: #232f3e;
+            --warm-white: #FFF9F0;
+            --text-dark: #2C2C2C;
+            --accent-blue: #0073bb;
+            --light-gray: #f5f5f5;
+            --border-color: #e0d5c7;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--dark-bg);
+            padding: 12px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.85em;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        nav a:hover { background: var(--chinese-red); }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--chinese-red) 0%, #8B0000 50%, var(--dark-bg) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "中国";
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+        .hero .subtitle {
+            color: var(--gold);
+            font-size: 1.1em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--chinese-red);
+        }
+        
+        h2 {
+            color: var(--chinese-red);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        h3 {
+            color: var(--dark-bg);
+            font-size: 1.3em;
+            margin: 25px 0 12px 0;
+        }
+        
+        h4 {
+            color: var(--chinese-red);
+            font-size: 1.1em;
+            margin: 15px 0 8px 0;
+        }
+        
+        .citation {
+            color: var(--accent-blue);
+            font-size: 0.85em;
+            font-weight: bold;
+            vertical-align: super;
+        }
+        
+        /* Cards */
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .city-card {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .city-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .city-card h3 {
+            color: var(--chinese-red);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--chinese-red);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .badge.green { background: #2e7d32; }
+        .badge.blue { background: var(--accent-blue); }
+        .badge.gold { background: var(--gold); color: var(--dark-bg); }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+            font-size: 0.95em;
+        }
+        .info-row .label {
+            font-weight: bold;
+            min-width: 80px;
+            color: #555;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: var(--dark-bg);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        tr:nth-child(even) { background: #f9f6f2; }
+        tr:hover { background: #fff3e0; }
+        
+        /* Lists */
+        ul, ol {
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+        li { margin: 6px 0; }
+        
+        /* Practical Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .info-box.warning {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-color: #ff9800;
+        }
+        .info-box.tip {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-color: #4caf50;
+        }
+        
+        /* Itinerary Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--chinese-red);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 2px solid var(--chinese-red);
+        }
+        
+        /* Map Section */
+        .map-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .map-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85em;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        /* Details/Summary for collapsible */
+        details {
+            margin: 10px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            background: var(--light-gray);
+        }
+        details[open] {
+            background: white;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--chinese-red);
+            padding: 5px 0;
+        }
+        summary:hover { color: #8B0000; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .city-grid { grid-template-columns: 1fr; }
+            nav { padding: 8px 10px; }
+            nav a { font-size: 0.75em; margin: 0 5px; }
+            section { padding: 20px; }
+            table { font-size: 0.8em; }
+            th, td { padding: 8px; }
+        }
+        
+        /* Transport comparison */
+        .transport-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e3f2fd;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 3px;
+        }
+        .transport-option.train { background: #e8f5e9; }
+        .transport-option.flight { background: #fce4ec; }
+        .transport-option.bus { background: #fff3e0; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#info-practica">Info Práctica</a>
+    <a href="#ciudades">Ciudades</a>
+    <a href="#muralla">Muralla China</a>
+    <a href="#sitios-budistas">Sitios Budistas</a>
+    <a href="#parques">Parques Naturales</a>
+    <a href="#transporte">Transporte</a>
+    <a href="#itinerarios">Itinerarios</a>
+    <a href="#mapa">Mapa</a>
+</nav>
+
+<header class="hero">
+    <h1>🇨🇳 Itinerario Turístico por China</h1>
+    <p>Una guía completa para explorar la historia, tradiciones y paisajes naturales del gigante asiático</p>
+    <p class="subtitle">Diseñado para estudiantes que desean conocer la civilización china de primera mano</p>
+</header>
+
+<main>
+
+<!-- RESUMEN EJECUTIVO -->
+<section>
+    <h2>Resumen del Itinerario</h2>
+    <p>China ofrece una riqueza incomparable de destinos educativos que abarcan desde dinastías antiguas hasta Patrimonio de la Humanidad UNESCO y desarrollo moderno <span class="citation"><a href="#ref-1" class="citation">[1]</a></span>. Esta guía incluye <strong>más de 20 puntos de interés</strong> distribuidos por todo el país, desde las metrópolis de Pekín y Shanghái hasta las remotas Cuevas de Mogao en el desierto de Gobi y los paisajes kársticos de Guilin.</p>
+    
+    <div class="info-box tip">
+        <strong>🛡️ Seguridad:</strong> China está clasificada como destino de <strong>Riesgo Bajo de Viaje</strong> según la guía de Columbia Business School AY25-26. Se puede viajar con precauciones de seguridad estándar <span class="citation"><a href="#ref-2" class="citation">[2]</a></span>. El gobierno del Reino Unido recomienda evitar manifestaciones y llevar identificación en todo momento <span class="citation"><a href="#ref-3" class="citation">[3]</a></span>.
+    </div>
+    
+    <div class="info-box">
+        <strong>📅 Mejor época para viajar:</strong> Abril, mayo, septiembre y mediados a finales de octubre ofrecen el mejor clima, paisajes y multitudes manejables <span class="citation"><a href="#ref-4" class="citation">[4]</a></span>.
+    </div>
+</section>
+
+<!-- INFORMACIÓN PRÁCTICA -->
+<section id="info-practica">
+    <h2>📋 Información Práctica para el Viaje</h2>
+    
+    <h3>Visado y Entrada</h3>
+    <ul>
+        <li><strong>Entrada sin visa (30 días):</strong> Nacionales de 50 países pueden entrar a China sin visa por hasta 30 días para turismo, negocios o visitas familiares, extendido hasta el 31 de diciembre de 2026 <span class="citation"><a href="#ref-5" class="citation">[5]</a></span>.</li>
+        <li><strong>Tránsito sin visa (240 horas / 10 días):</strong> Ciudadanos de 55 países (incluyendo EE.UU., Reino Unido, Canadá, Australia, UE) pueden transitar sin visa hasta 240 horas a través de 65 puertos designados en 24 provincias, siempre que tengan boletos de continuación a un tercer país <span class="citation"><a href="#ref-6" class="citation">[6]</a></span>.</li>
+    </ul>
+    
+    <h3>Pagos y Comunicación</h3>
+    <ul>
+        <li><strong>Apps de pago:</strong> Tanto WeChat Pay como Alipay aceptan tarjetas internacionales Visa, Mastercard, American Express, JCB, Discover y Diners Club — no se necesita cuenta bancaria china <span class="citation"><a href="#ref-7" class="citation">[7]</a></span>. Las compras en Alipay menores a ¥200 son sin comisión <span class="citation"><a href="#ref-8" class="citation">[8]</a></span>.</li>
+        <li><strong>VPN necesario:</strong> Google, WhatsApp, Facebook, Instagram y X (Twitter) están bloqueados en China <span class="citation"><a href="#ref-9" class="citation">[9]</a></span>. Descarguen y configuren un VPN antes de salir, ya que las descargas pueden estar bloqueadas dentro del país <span class="citation"><a href="#ref-10" class="citation">[10]</a></span>.</li>
+    </ul>
+    
+    <h3>Consejos de Seguridad para Estudiantes</h3>
+    <ul>
+        <li>China es generalmente considerada segura para turistas con bajo crimen violento <span class="citation"><a href="#ref-11" class="citation">[11]</a></span>.</li>
+        <li>Evitar discutir temas de religión, sistemas políticos y relaciones étnicas. Registrar itinerarios con programas nacionales de viajeros <span class="citation"><a href="#ref-2" class="citation">[2]</a></span>.</li>
+        <li>Evitar manifestaciones o grandes concentraciones. Las autoridades chinas aplican el orden público estrictamente <span class="citation"><a href="#ref-3" class="citation">[3]</a></span>.</li>
+    </ul>
+</section>
+
+<!-- CIUDADES PRINCIPALES -->
+<section id="ciudades">
+    <h2>🏙️ Ciudades Principales</h2>
+    <p>Las grandes metrópolis chinas forman el núcleo del itinerario, cada una con su propia personalidad histórica y cultural.</p>
+    
+    <div class="city-grid">
+        <!-- BEIJING -->
+        <div class="city-card">
+            <h3>🏛️ Pekín (Beijing)</h3>
+            <span class="badge">3–4 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Ciudad Prohibida</strong>, <strong>Gran Muralla (Badaling/Mutianyu)</strong>, <strong>Palacio de Verano</strong>, <strong>Templo del Cielo</strong>, <strong>Plaza Tiananmen</strong>, <strong>Tumbas Ming</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Dinastías Ming y Qing (1368–1911); más de 150 museos; universidades top (Peking, Tsinghua) <span class="citation"><a href="#ref-1" class="citation">[1]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Shanghái: 4.5–6h, ¥576–697</span></li>
+                <li><span class="transport-option train">🚄 Xi'an: 4–6h, ¥480–593</span></li>
+                <li><span class="transport-option flight">✈️ Dunhuang: ~3.5h directo</span> <span class="citation"><a href="#ref-12" class="citation">[12]</a></span></li>
+                <li><span class="transport-option train">🚄 Datong: ~2h</span> <span class="citation"><a href="#ref-13" class="citation">[13]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- XI'AN -->
+        <div class="city-card">
+            <h3>⚔️ Xi'an</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Guerreros de Terracota</strong>, <strong>Muralla Antigua</strong>, <strong>Gran Pagoda del Ganso Salvaje</strong>, <strong>Museo Banpo</strong>, <strong>Barrio Musulmán</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Capital de 13 dinastías antiguas; Dinastía Qin (2,200+ años); herencia budista Tang <span class="citation"><a href="#ref-1" class="citation">[1]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Chengdú: ~4h, ¥263</span> <span class="citation"><a href="#ref-14" class="citation">[14]</a></span></li>
+                <li><span class="transport-option train">🚄 Pekín: 4–6h, ¥480–593</span></li>
+                <li><span class="transport-option bus">🚌 Guerreros Terracota: 1.5h, ¥9</span> <span class="citation"><a href="#ref-15" class="citation">[15]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- SHANGHAI -->
+        <div class="city-card">
+            <h3>🌃 Shanghái</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>El Bund</strong>, <strong>Jardín Yuyuan</strong>, <strong>Torre Perla Oriental</strong>, <strong>Templo Jing'an</strong>, <strong>Museo de Shanghái</strong>, <strong>Museo de Ciencia y Tecnología</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Arquitectura colonial europea; mezcla de jardines antiguos y skyline moderno; historia del comercio marítimo <span class="citation"><a href="#ref-1" class="citation">[1]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Hangzhou: 45 min, ~¥65</span> <span class="citation"><a href="#ref-16" class="citation">[16]</a></span></li>
+                <li><span class="transport-option train">🚄 Pekín: 4.5–6h, ¥576–697</span></li>
+                <li><span class="transport-option flight">✈️ Guilin: ~2.5h</span> <span class="citation"><a href="#ref-17" class="citation">[17]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- CHENGDU -->
+        <div class="city-card">
+            <h3>🐼 Chengdú</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Base de Investigación del Panda Gigante</strong>, <strong>Calle Antigua Jinli</strong>, <strong>Templo Wuhou</strong>, <strong>Cabaña de Du Fu</strong>, <strong>Dujiangyan</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Historia de los Tres Reinos; Ciudad UNESCO de la Gastronomía; 2,300+ años de historia; ópera de Sichuan <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Leshan (Buda Gigante): ~1h, ¥30–65</span> <span class="citation"><a href="#ref-19" class="citation">[19]</a></span></li>
+                <li><span class="transport-option train">🚄 Xi'an: ~4h, ¥263</span> <span class="citation"><a href="#ref-14" class="citation">[14]</a></span></li>
+                <li><span class="transport-option flight">✈️ Jiuzhaigou: ~1h</span> <span class="citation"><a href="#ref-20" class="citation">[20]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- HONG KONG -->
+        <div class="city-card">
+            <h3>🌆 Hong Kong</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Victoria Peak</strong>, <strong>Templo Man Mo</strong>, <strong>Templo Wong Tai Sin</strong>, <strong>Star Ferry</strong>, <strong>museos culturales</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Herencia colonial Este-Oeste; templos cantoneses tradicionales; centro financiero moderno <span class="citation"><a href="#ref-21" class="citation">[21]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Guilin: 3–3.5h, ¥415–450</span></li>
+            </ul>
+        </div>
+        
+        <!-- GUANGZHOU -->
+        <div class="city-card">
+            <h3>🌺 Guangzhou (Cantón)</h3>
+            <span class="badge">1–2 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Museo de Guangdong</strong>, <strong>Jardín Botánico del Sur de China</strong>, <strong>Chimelong Safari Park</strong>, <strong>Torre de Cantón</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Historia de la Ruta Marítima de la Seda; cultura y cocina cantonesa; biodiversidad tropical/subtropical <span class="citation"><a href="#ref-1" class="citation">[1]</a></span></div>
+        </div>
+        
+        <!-- GUILIN -->
+        <div class="city-card">
+            <h3>🏔️ Guilin</h3>
+            <span class="badge">3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Crucero por el Río Li</strong>, <strong>Terrazas de Arroz de Longsheng</strong>, <strong>Cueva de la Flauta de Caña</strong>, <strong>Colina Trompa de Elefante</strong>, <strong>campo de Yangshuo</strong></div>
+            <div class="info-row"><span class="label">Itinerario ideal:</span> 1 día en <strong>Guilin</strong> ciudad, 1 día en <strong>Yangshuo</strong>, 1 día en <strong>Longsheng</strong> <span class="citation"><a href="#ref-22" class="citation">[22]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Hong Kong: 3–3.5h, ¥415</span></li>
+                <li><span class="transport-option flight">✈️ Shanghái: ~2.5h</span> <span class="citation"><a href="#ref-17" class="citation">[17]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- HANGZHOU -->
+        <div class="city-card">
+            <h3>🍵 Hangzhou</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Lago del Oeste</strong>, <strong>Gran Canal</strong>, <strong>plantaciones de té (Nueve Arroyos)</strong>, <strong>Museo Provincial de Zhejiang</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Aprender a recoger hojas de té y preparar té, una forma interesante de conocer la cultura del té chino <span class="citation"><a href="#ref-1" class="citation">[1]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Shanghái: 45 min, ~¥65</span> <span class="citation"><a href="#ref-16" class="citation">[16]</a></span></li>
+            </ul>
+        </div>
+        
+        <!-- KUNMING -->
+        <div class="city-card">
+            <h3>🌸 Kunming</h3>
+            <span class="badge">2–3 días (puerta a Yunnan)</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Bosque de Piedra</strong>, <strong>Lago Dianchi</strong>, <strong>aldeas de minorías étnicas de Yunnan</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Puerta de entrada a un tour clásico de 8 días por Yunnan: Kunming, Lijiang, Dali y Shangri-La <span class="citation"><a href="#ref-23" class="citation">[23]</a></span></div>
+            <div class="info-row"><span class="label">Conexiones:</span></div>
+            <ul>
+                <li><span class="transport-option train">🚄 Lijiang: 3–4.5h, ¥174–199</span></li>
+            </ul>
+        </div>
+        
+        <!-- NANJING -->
+        <div class="city-card">
+            <h3>📜 Nanjing</h3>
+            <span class="badge">2 días</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Mausoleo de Sun Yat-sen</strong>, <strong>Murallas de la Dinastía Ming</strong>, <strong>Templo de Confucio (Fuzimiao)</strong>, <strong>Memorial de la Masacre de Nanjing</strong></div>
+            <div class="info-row"><span class="label">Destacado:</span> Antigua capital imperial con profunda importancia histórica moderna</div>
+        </div>
+        
+        <!-- LHASA -->
+        <div class="city-card">
+            <h3>🏔️ Lhasa (Tíbet)</h3>
+            <span class="badge gold">3–4 días (permiso requerido)</span>
+            <div class="info-row"><span class="label">Atracciones:</span> <strong>Palacio Potala</strong>, <strong>Templo Jokhang</strong>, <strong>Calle Barkhor</strong>, <strong>Monasterio Sera</strong></div>
+            <div class="info-row"><span class="label">⚠️ Importante:</span> Se requiere permiso especial de viaje al Tíbet para extranjeros <span class="citation"><a href="#ref-2" class="citation">[2]</a></span></div>
+        </div>
+    </div>
+</section>
+
+<!-- GRAN MURALLA CHINA -->
+<section id="muralla">
+    <h2>🧱 La Gran Muralla China</h2>
+    <p>La Gran Muralla es visitable desde Pekín en varias secciones, cada una con su propio carácter. Las mejores épocas son abril–mayo y septiembre–octubre <span class="citation"><a href="#ref-4" class="citation">[4]</a></span>.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Sección</th>
+                <th>Distancia desde Pekín</th>
+                <th>Transporte</th>
+                <th>Entrada</th>
+                <th>Ideal para</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Badaling</strong></td>
+                <td>~60–70 km</td>
+                <td>Tren de alta velocidad (30 min), Bus 877 (~1.5h, ¥6)</td>
+                <td>¥40 temporada alta / ¥35 baja <span class="citation"><a href="#ref-24" class="citation">[24]</a></span></td>
+                <td>Primerizos, familias</td>
+            </tr>
+            <tr>
+                <td><strong>Mutianyu</strong></td>
+                <td>~70–75 km</td>
+                <td>Bus turístico ~1.5h, ¥75–95 <span class="citation"><a href="#ref-25" class="citation">[25]</a></span></td>
+                <td>Teleférico/tobogán disponible</td>
+                <td>Familias, fotógrafos</td>
+            </tr>
+            <tr>
+                <td><strong>Jinshanling</strong></td>
+                <td>~130 km</td>
+                <td>Auto privado/tour bus (~2.5h)</td>
+                <td>¥65 + ¥40 teleférico <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></td>
+                <td>Senderistas, amantes de la naturaleza</td>
+            </tr>
+            <tr>
+                <td><strong>Simatai</strong></td>
+                <td>~120 km</td>
+                <td>Auto privado (~2h)</td>
+                <td>Tours nocturnos disponibles</td>
+                <td>Aventureros, parejas</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><span class="citation"><a href="#ref-26" class="citation">[26]</a></span></p>
+    
+    <div class="info-box tip">
+        <strong>💡 Recomendación para estudiantes:</strong> Mutianyu es la mejor opción — menos multitudes, vistas impresionantes del bosque, y tiene tobogán de bajada. Badaling es la más accesible con tren de alta velocidad directo en 30 minutos.
+    </div>
+</section>
+
+<!-- SITIOS BUDISTAS E HISTÓRICOS -->
+<section id="sitios-budistas">
+    <h2>🛕 Sitios Budistas e Históricos</h2>
+    <p>China alberga algunos de los sitios budistas más impresionantes del mundo, desde el oasis de la Ruta de la Seda en Dunhuang hasta los valles fluviales de Sichuan y el altiplano tibetano.</p>
+    
+    <div class="city-grid">
+        <!-- MOGAO CAVES -->
+        <div class="city-card">
+            <h3>🏜️ Cuevas de Mogao (Mil Budas) — Dunhuang</h3>
+            <span class="badge">2–3 días</span>
+            <div class="info-row"><span class="label">Ubicación:</span> Desierto de Gobi, 24 km de Dunhuang</div>
+            <div class="info-row"><span class="label">Significado:</span> Santuario de los Mil Budas en la antigua Ruta de la Seda. El número de visitantes está limitado para preservación <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>.</div>
+            
+            <h4>¿Cómo llegar?</h4>
+            <ul>
+                <li><strong>Desde Pekín:</strong> Vuelo directo ~3.5h (recomendado). El tren tarda 35.5h, no recomendable <span class="citation"><a href="#ref-27" class="citation">[27]</a></span>.</li>
+                <li><strong>Desde Xi'an:</strong> Tren ¥200–¥470, ~19–24h; o vuelo directo disponible <span class="citation"><a href="#ref-28" class="citation">[28]</a></span>.</li>
+                <li><strong>Aeropuerto de Dunhuang:</strong> Opera vuelos desde Pekín, Shanghái, Guangzhou, Chengdú, Hangzhou, Lanzhou, Xi'an, Xining y Hong Kong <span class="citation"><a href="#ref-29" class="citation">[29]</a></span>.</li>
+            </ul>
+            
+            <h4>Logística local</h4>
+            <ul>
+                <li>Primero ir al Centro de Exhibición Digital para boletos y autobús lanzadera a las cuevas <span class="citation"><a href="#ref-30" class="citation">[30]</a></span>.</li>
+                <li>Autobús urbano cada 30 min (CNY 8).</li>
+                <li>Alojamiento en el centro de Dunhuang, ~13 km del aeropuerto <span class="citation"><a href="#ref-29" class="citation">[29]</a></span>.</li>
+                <li>Combinar con Lago de la Media Luna y Dunas Mingsha <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>.</li>
+            </ul>
+        </div>
+        
+        <!-- LESHAN GIANT BUDDHA -->
+        <div class="city-card">
+            <h3>🗿 Buda Gigante de Leshan</h3>
+            <span class="badge green">1 día</span>
+            <div class="info-row"><span class="label">Ubicación:</span> Leshan, Sichuan (cerca de Chengdú)</div>
+            <div class="info-row"><span class="label">Significado:</span> Parte del Patrimonio UNESCO junto con Monte Emei desde 1996 <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            
+            <h4>¿Cómo llegar desde Chengdú?</h4>
+            <ul>
+                <li><span class="transport-option train">🚄 Tren alta velocidad: ~41 min desde Chengdu Sur</span> <span class="citation"><a href="#ref-31" class="citation">[31]</a></span></li>
+                <li>Trenes tipo intercity de 6am a 11pm, uno cada pocos minutos en hora punta <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></li>
+                <li>Luego autobús local hasta el sitio del Buda <span class="citation"><a href="#ref-32" class="citation">[32]</a></span></li>
+            </ul>
+            
+            <h4>Información de visita</h4>
+            <ul>
+                <li><strong>Entrada:</strong> CNY 90 por persona (incluye Templo Wuyou y Tumba del Acantilado Mahao) <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></li>
+                <li><strong>Barcos panorámicos:</strong> CNY 70 para vistas panorámicas del Buda</li>
+                <li><strong>Horario:</strong> 7:30am–6:30pm (abril–octubre) <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></li>
+            </ul>
+            
+            <div class="info-box tip">
+                <strong>💡 Combinar con Monte Emei:</strong> Leshan a Emeishan son solo 45 km, con trenes de alta velocidad en ~15 minutos <span class="citation"><a href="#ref-33" class="citation">[33]</a></span>. Recomendamos 1 día para el Buda + 2 días para Monte Emei.
+            </div>
+        </div>
+        
+        <!-- LONGMEN GROTTOES -->
+        <div class="city-card">
+            <h3>🏛️ Grutas de Longmen — Luoyang</h3>
+            <span class="badge blue">Medio día</span>
+            <div class="info-row"><span class="label">Ubicación:</span> 12 km al sur de Luoyang</div>
+            <div class="info-row"><span class="label">Significado:</span> 100,000 estatuas en 2,345 cuevas, desde la dinastía Wei del Norte hasta Tang <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            
+            <h4>Acceso</h4>
+            <ul>
+                <li>~30 min en transporte local desde Luoyang</li>
+                <li>Luoyang conectada por tren de alta velocidad desde Xi'an, Pekín y Zhengzhou</li>
+                <li>Reservar medio día para la visita</li>
+            </ul>
+        </div>
+        
+        <!-- SHAOLIN TEMPLE -->
+        <div class="city-card">
+            <h3>🥋 Templo Shaolin — Dengfeng</h3>
+            <span class="badge blue">Medio día – 1 día</span>
+            <div class="info-row"><span class="label">Ubicación:</span> 48 km al sureste de Luoyang, 72 km al suroeste de Zhengzhou <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Significado:</span> Cuna del budismo Chan y del kung fu; UNESCO 2010</div>
+            
+            <h4>Recomendación</h4>
+            <ul>
+                <li>1–1.5h desde Luoyang o Zhengzhou</li>
+                <li>Combinar con Grutas de Longmen en un itinerario de 2 días en Luoyang</li>
+            </ul>
+        </div>
+        
+        <!-- HANGING TEMPLE + YUNGANG -->
+        <div class="city-card">
+            <h3>⛩️ Templo Colgante + Grutas Yungang — Datong</h3>
+            <span class="badge blue">1 día (excursión)</span>
+            <div class="info-row"><span class="label">Ubicación:</span> Templo Colgante: 64 km de Datong; Yungang: 40 min de Datong</div>
+            <div class="info-row"><span class="label">Significado:</span> Templo Colgante construido hace 1,500+ años; Yungang con magníficas esculturas budistas</div>
+            
+            <h4>¿Cómo llegar?</h4>
+            <ul>
+                <li><span class="transport-option train">🚄 Pekín → Datong: ~2h en tren bala</span> <span class="citation"><a href="#ref-13" class="citation">[13]</a></span></li>
+                <li>Templo Colgante: 1.5h en auto desde Datong, visita de 2–3h <span class="citation"><a href="#ref-34" class="citation">[34]</a></span> <span class="citation"><a href="#ref-35" class="citation">[35]</a></span></li>
+                <li>Grutas Yungang: 40 min desde Datong, visita de 3–4h</li>
+                <li>Ambos sitios combinables en una excursión de un día</li>
+            </ul>
+        </div>
+        
+        <!-- POTALA PALACE -->
+        <div class="city-card">
+            <h3>🏔️ Palacio Potala — Lhasa</h3>
+            <span class="badge gold">2–3 días (permiso requerido)</span>
+            <div class="info-row"><span class="label">Ubicación:</span> Lhasa, a 3,700m de altitud</div>
+            <div class="info-row"><span class="label">⚠️ Importante:</span> Límite diario de ~2,300 visitantes (cuota a menudo agotada por la mañana) <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            
+            <h4>Logística</h4>
+            <ul>
+                <li>Los extranjeros deben obtener un Permiso de Viaje al Tíbet a través de una agencia registrada <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></li>
+                <li>Vuelos desde Chengdú/Pekín; Ferrocarril Qinghai-Tíbet</li>
+                <li>Reservar 2–3 días para aclimatación a la altitud</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PARQUES NATURALES -->
+<section id="parques">
+    <h2>🌿 Parques Naturales y Paisajes Espectaculares</h2>
+    <p>Las mejores temporadas para todos los sitios naturales son primavera (abril–junio) y otoño (septiembre–noviembre), equilibrando clima agradable con multitudes manejables.</p>
+    
+    <div class="city-grid">
+        <!-- ZHANGJIAJIE -->
+        <div class="city-card">
+            <h3>🪨 Zhangjiajie (Montañas Avatar)</h3>
+            <span class="badge">2–3 días</span> <span class="badge green">Dificultad: Moderada</span>
+            <div class="info-row"><span class="label">Acceso:</span> Ciudad de Zhangjiajie (aeropuerto + tren bala); 40 min del aeropuerto al parque. Vuelos desde Pekín, Shanghái, Chengdú</div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Hospedarse en el distrito de Wulingyuan cerca de la entrada del parque <span class="citation"><a href="#ref-36" class="citation">[36]</a></span></div>
+            <div class="info-row"><span class="label">Nota:</span> Caminata extensa (25,000+ pasos/día) pero hay teleféricos y elevadores disponibles. Eco-buses conectan las áreas.</div>
+            <div class="info-row"><span class="label">Temporada:</span> Abril–junio y septiembre–noviembre <span class="citation"><a href="#ref-37" class="citation">[37]</a></span></div>
+        </div>
+        
+        <!-- GUILIN/YANGSHUO -->
+        <div class="city-card">
+            <h3>🏞️ Guilin / Yangshuo (Paisajes Kársticos)</h3>
+            <span class="badge">2–4 noches</span> <span class="badge green">Dificultad: Fácil</span>
+            <div class="info-row"><span class="label">Acceso:</span> Guilin (aeropuerto internacional + tren alta velocidad). Crucero por Río Li: 4h Guilin→Yangshuo</div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Hoteles en Guilin ciudad o casas de huéspedes en Yangshuo <span class="citation"><a href="#ref-38" class="citation">[38]</a></span></div>
+            <div class="info-row"><span class="label">Actividades:</span> Crucero, ciclismo, terrazas de arroz. Terreno mayormente plano, altamente accesible para todos los niveles.</div>
+            <div class="info-row"><span class="label">Temporada:</span> Finales de abril a mediados de mayo y finales de septiembre a mediados de noviembre (18–26°C) <span class="citation"><a href="#ref-39" class="citation">[39]</a></span></div>
+        </div>
+        
+        <!-- JIUZHAIGOU -->
+        <div class="city-card">
+            <h3>💧 Valle de Jiuzhaigou</h3>
+            <span class="badge">1–2 días</span> <span class="badge green">Dificultad: Fácil-Moderada</span>
+            <div class="info-row"><span class="label">Acceso:</span> Desde Chengdú: vuelo ~1h al Aeropuerto Jiuzhai Huanglong; o tren vía estación Huanglongjiuzhai (abierta agosto 2024) + 90 min en bus <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Costo vuelo:</span> CNY 800–1,500 (~$110–210) <span class="citation"><a href="#ref-20" class="citation">[20]</a></span></div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Hoteles en pueblo de Zhangzha a la salida del valle, incluyendo opciones de lujo (Sheraton) <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Nota:</span> Pasarelas de madera y autobuses lanzadera; elevación 2,000–4,500m puede causar efectos leves de altitud <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>. Límite de 41,000 visitantes diarios con boletos por horario <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>.</div>
+            <div class="info-row"><span class="label">Temporada:</span> Otoño (septiembre–noviembre) para follaje colorido <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+        </div>
+        
+        <!-- TIGER LEAPING GORGE -->
+        <div class="city-card">
+            <h3>🐯 Garganta del Salto del Tigre</h3>
+            <span class="badge">2 días</span> <span class="badge" style="background:#e65100;">Dificultad: Desafiante</span>
+            <div class="info-row"><span class="label">Acceso:</span> 2h en auto desde Lijiang o 3h desde Shangri-La <span class="citation"><a href="#ref-40" class="citation">[40]</a></span></div>
+            <div class="info-row"><span class="label">Ruta:</span> Sendero alto ~22 km con casas de huéspedes a lo largo del camino <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Casas de huéspedes a lo largo del sendero alto</div>
+            <div class="info-row"><span class="label">Nota:</span> Apto para adolescentes hasta adultos mayores en buena forma <span class="citation"><a href="#ref-41" class="citation">[41]</a></span>. Evitar temporada de lluvias (julio–agosto) cuando el sendero puede ser intransitable <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>.</div>
+            <div class="info-row"><span class="label">Temporada:</span> Marzo–junio y septiembre–noviembre</div>
+        </div>
+        
+        <!-- HUANGSHAN -->
+        <div class="city-card">
+            <h3>⛰️ Huangshan (Montaña Amarilla)</h3>
+            <span class="badge">1–2 días</span> <span class="badge" style="background:#e65100;">Dificultad: Moderada-Desafiante</span>
+            <div class="info-row"><span class="label">Acceso:</span> Ciudad de Huangshan/Tunxi (aeropuerto + tren alta velocidad vía líneas Hefei–Fuzhou y Hangzhou–Nanchang) <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>. Bus a la base, luego teleférico o caminata.</div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Hoteles en la cumbre o en la zona base de Tangkou. Pernoctar en la cumbre para ver el amanecer <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Nota:</span> Más de 50 km de senderos; teleféricos reducen significativamente la dificultad <span class="citation"><a href="#ref-18" class="citation">[18]</a></span></div>
+            <div class="info-row"><span class="label">Temporada:</span> Primavera y otoño; evitar primeras semanas de mayo y octubre (feriados nacionales) <span class="citation"><a href="#ref-42" class="citation">[42]</a></span></div>
+        </div>
+        
+        <!-- ZHANGYE DANXIA -->
+        <div class="city-card">
+            <h3>🌈 Montañas Arcoíris de Zhangye Danxia</h3>
+            <span class="badge green">Medio día (3–5h)</span> <span class="badge green">Dificultad: Fácil</span>
+            <div class="info-row"><span class="label">Acceso:</span> Parque a 30 km al oeste de Zhangye <span class="citation"><a href="#ref-18" class="citation">[18]</a></span>. Desde Pekín/Shanghái: volar a Lanzhou, luego tren 6–7h a Zhangye <span class="citation"><a href="#ref-43" class="citation">[43]</a></span></div>
+            <div class="info-row"><span class="label">Alojamiento:</span> Hoteles en ciudad de Zhangye (~35 km) o casas de huéspedes cerca del parque <span class="citation"><a href="#ref-44" class="citation">[44]</a></span></div>
+            <div class="info-row"><span class="label">Nota:</span> Plataformas de observación accesibles por autobús lanzadera dentro del parque; mínima caminata requerida; apto para todos los grupos <span class="citation"><a href="#ref-45" class="citation">[45]</a></span>. Tiempo recomendado: 3–5h <span class="citation"><a href="#ref-45" class="citation">[45]</a></span></div>
+            <div class="info-row"><span class="label">Temporada:</span> Primavera y otoño; tarde ideal para fotografía <span class="citation"><a href="#ref-46" class="citation">[46]</a></span></div>
+        </div>
+    </div>
+</section>
+
+<!-- TRANSPORTE ENTRE CIUDADES -->
+<section id="transporte">
+    <h2>🚄 Transporte entre Destinos</h2>
+    <p>La red de trenes de alta velocidad de China conecta la mayoría de las ciudades turísticas principales en 1–6 horas a costos de CNY 30–760 (~$4–$110) por boleto de segunda clase.</p>
+    
+    <h3>Rutas Principales en Tren de Alta Velocidad</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ruta</th>
+                <th>Duración</th>
+                <th>Costo (2ª clase)</th>
+                <th>Notas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pekín → Shanghái</td>
+                <td>4.5–6h</td>
+                <td>¥576–697 (~$86–104)</td>
+                <td>~46 trenes G diarios</td>
+            </tr>
+            <tr>
+                <td>Pekín → Xi'an</td>
+                <td>4–6h</td>
+                <td>¥480–593 (~$72–89)</td>
+                <td>~40 trenes diarios</td>
+            </tr>
+            <tr>
+                <td>Shanghái → Hangzhou</td>
+                <td>45 min–1h</td>
+                <td>~¥65–73 (~$10)</td>
+                <td>200+ trenes diarios <span class="citation"><a href="#ref-16" class="citation">[16]</a></span></td>
+            </tr>
+            <tr>
+                <td>Xi'an → Chengdú</td>
+                <td>~4h</td>
+                <td>¥263 (~$38)</td>
+                <td>658 km, 250 km/h <span class="citation"><a href="#ref-14" class="citation">[14]</a></span></td>
+            </tr>
+            <tr>
+                <td>Chengdú → Leshan</td>
+                <td>~1h</td>
+                <td>¥30–65 (~$4–10)</td>
+                <td>~68 salidas diarias <span class="citation"><a href="#ref-19" class="citation">[19]</a></span></td>
+            </tr>
+            <tr>
+                <td>Hong Kong → Guilin</td>
+                <td>3–3.5h</td>
+                <td>¥415–450 (~$61–66)</td>
+                <td>Directo desde West Kowloon</td>
+            </tr>
+            <tr>
+                <td>Shanghái → Guilin</td>
+                <td>~9h</td>
+                <td>¥670–760 (~$99–110)</td>
+                <td>Solo 2 trenes diarios; vuelo preferible <span class="citation"><a href="#ref-47" class="citation">[47]</a></span></td>
+            </tr>
+            <tr>
+                <td>Kunming → Lijiang</td>
+                <td>3–4.5h</td>
+                <td>¥174–199 (~$26–29)</td>
+                <td>12 pares diarios</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>Vuelos Domésticos (Distancias Largas)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ruta</th>
+                <th>Tiempo de vuelo</th>
+                <th>Costo aprox.</th>
+                <th>Notas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pekín → Dunhuang</td>
+                <td>~3.5h (directo)</td>
+                <td>~$114–176</td>
+                <td>Vuelos directos diarios; conexión vía Lanzhou toma 5+h <span class="citation"><a href="#ref-12" class="citation">[12]</a></span></td>
+            </tr>
+            <tr>
+                <td>Shanghái → Guilin</td>
+                <td>~2.5h</td>
+                <td>~$60–150</td>
+                <td>Vuelo muy recomendado sobre tren de 9h <span class="citation"><a href="#ref-17" class="citation">[17]</a></span></td>
+            </tr>
+            <tr>
+                <td>Chengdú → Jiuzhaigou</td>
+                <td>~1h</td>
+                <td>¥800–1,500 (~$110–210)</td>
+                <td>Al Aeropuerto Jiuzhai Huanglong; o tren 1.5–2.5h + 2h bus (~¥200 total) <span class="citation"><a href="#ref-20" class="citation">[20]</a></span></td>
+            </tr>
+            <tr>
+                <td>Pekín → Dunhuang (tren)</td>
+                <td>~35.5h</td>
+                <td>¥250+</td>
+                <td>NO recomendado; vuelo fuertemente preferido <span class="citation"><a href="#ref-27" class="citation">[27]</a></span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>Transporte Local a Atracciones</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Destino</th>
+                <th>Desde</th>
+                <th>Medio</th>
+                <th>Tiempo</th>
+                <th>Costo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mutianyu (Muralla)</td>
+                <td>Pekín</td>
+                <td>Bus turístico</td>
+                <td>~1.5h</td>
+                <td>¥75–95 <span class="citation"><a href="#ref-25" class="citation">[25]</a></span></td>
+            </tr>
+            <tr>
+                <td>Guerreros de Terracota</td>
+                <td>Xi'an (Estación)</td>
+                <td>Bus Línea 915</td>
+                <td>~1.5h</td>
+                <td>¥9 <span class="citation"><a href="#ref-15" class="citation">[15]</a></span></td>
+            </tr>
+            <tr>
+                <td>Buda Gigante de Leshan</td>
+                <td>Chengdú Este</td>
+                <td>Tren alta velocidad + bus local</td>
+                <td>~1h total</td>
+                <td>¥30–65 <span class="citation"><a href="#ref-32" class="citation">[32]</a></span></td>
+            </tr>
+            <tr>
+                <td>Templo Colgante</td>
+                <td>Datong</td>
+                <td>Auto/tour</td>
+                <td>~1.5h</td>
+                <td>Variable <span class="citation"><a href="#ref-35" class="citation">[35]</a></span></td>
+            </tr>
+            <tr>
+                <td>Cuevas de Mogao</td>
+                <td>Dunhuang centro</td>
+                <td>Bus urbano (cada 30 min)</td>
+                <td>~30 min</td>
+                <td>¥8</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ITINERARIOS SUGERIDOS -->
+<section id="itinerarios">
+    <h2>📅 Itinerarios Sugeridos</h2>
+    <p>Aquí presentamos tres opciones de itinerario según el tiempo disponible. Los estudiantes pueden mezclar y combinar según sus intereses.</p>
+    
+    <details>
+        <summary>🗓️ Itinerario Clásico — 7 días (Lo esencial)</summary>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Días 1–3: Pekín</strong><br>
+                <strong>Ciudad Prohibida</strong>, <strong>Templo del Cielo</strong>, <strong>Palacio de Verano</strong>, <strong>Gran Muralla</strong> (Mutianyu o Badaling)
+            </div>
+            <div class="timeline-item">
+                <strong>Día 4: Traslado Pekín → Shanghái</strong><br>
+                🚄 Tren alta velocidad 4.5–6h. Tarde libre en <strong>El Bund</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 5–6: Shanghái</strong><br>
+                <strong>El Bund</strong>, <strong>Jardín Yuyuan</strong>, <strong>Torre Perla Oriental</strong>, <strong>Templo Jing'an</strong>
+            </div>
+            <div class="timeline-item">
+                <strong>Día 7: Excursión a Hangzhou</strong><br>
+                🚄 45 min ida. <strong>Lago del Oeste</strong>, plantaciones de té. Regreso a Shanghái.
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>🗓️ Itinerario Completo — 14 días (Historia + Naturaleza)</summary>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Días 1–3: Pekín</strong><br>
+                <strong>Ciudad Prohibida</strong>, <strong>Gran Muralla</strong>, <strong>Templo del Cielo</strong>, <strong>Palacio de Verano</strong>
+            </div>
+            <div class="timeline-item">
+                <strong>Día 4: Pekín → Xi'an</strong><br>
+                🚄 4–6h. Llegada y paseo por el <strong>Barrio Musulmán</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 5–6: Xi'an</strong><br>
+                <strong>Guerreros de Terracota</strong>, <strong>Muralla Antigua</strong>, <strong>Gran Pagoda del Ganso Salvaje</strong>
+            </div>
+            <div class="timeline-item">
+                <strong>Día 7: Xi'an → Chengdú</strong><br>
+                🚄 ~4h. Tarde en <strong>Calle Jinli</strong> y <strong>Templo Wuhou</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Día 8: Chengdú</strong><br>
+                <strong>Base de Pandas</strong> por la mañana. <strong>Ópera de Sichuan</strong> por la noche.
+            </div>
+            <div class="timeline-item">
+                <strong>Día 9: Excursión Leshan + Monte Emei</strong><br>
+                🚄 41 min a Leshan. <strong>Buda Gigante</strong>. Opción: continuar a <strong>Monte Emei</strong> (15 min más).
+            </div>
+            <div class="timeline-item">
+                <strong>Día 10: Chengdú → Shanghái</strong><br>
+                ✈️ Vuelo ~2.5h. Tarde en <strong>El Bund</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 11–12: Shanghái + Hangzhou</strong><br>
+                <strong>Shanghái</strong> un día completo. Excursión a <strong>Hangzhou</strong> (45 min tren).
+            </div>
+            <div class="timeline-item">
+                <strong>Días 13–14: Guilin / Yangshuo</strong><br>
+                ✈️ Shanghái → Guilin 2.5h. <strong>Crucero Río Li</strong>, paisajes kársticos, ciclismo en <strong>Yangshuo</strong>.
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>🗓️ Itinerario Épico — 21 días (La experiencia completa)</summary>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Días 1–4: Pekín</strong><br>
+                <strong>Ciudad Prohibida</strong>, <strong>Gran Muralla</strong> (Mutianyu), <strong>Templo del Cielo</strong>, <strong>Palacio de Verano</strong>. Excursión a Datong: <strong>Templo Colgante</strong> + <strong>Grutas Yungang</strong> (tren bala 2h).
+            </div>
+            <div class="timeline-item">
+                <strong>Días 5–6: Pekín → Dunhuang</strong><br>
+                ✈️ Vuelo 3.5h. <strong>Cuevas de Mogao</strong>, <strong>Lago Media Luna</strong>, <strong>Dunas Mingsha</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 7–9: Dunhuang → Xi'an</strong><br>
+                ✈️ Vuelo a Xi'an. <strong>Guerreros de Terracota</strong>, <strong>Muralla Antigua</strong>, <strong>Barrio Musulmán</strong>, <strong>Gran Pagoda del Ganso Salvaje</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 10–11: Xi'an → Chengdú</strong><br>
+                🚄 4h. <strong>Base de Pandas</strong>, <strong>Calle Jinli</strong>, excursión a Leshan (<strong>Buda Gigante</strong>) y <strong>Monte Emei</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 12–13: Chengdú → Jiuzhaigou</strong><br>
+                ✈️ 1h vuelo. <strong>Valle de Jiuzhaigou</strong>: lagos turquesa, cascadas, bosques.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 14–15: Regreso a Chengdú → Shanghái</strong><br>
+                ✈️ Vuelo. Shanghái: <strong>El Bund</strong>, <strong>Jardín Yuyuan</strong>, museos.
+            </div>
+            <div class="timeline-item">
+                <strong>Día 16: Shanghái → Hangzhou</strong><br>
+                🚄 45 min. <strong>Lago del Oeste</strong>, cultura del té.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 17–19: Guilin / Yangshuo</strong><br>
+                ✈️ Shanghái → Guilin. <strong>Crucero Río Li</strong>, <strong>Terrazas de Longsheng</strong>, ciclismo <strong>Yangshuo</strong>.
+            </div>
+            <div class="timeline-item">
+                <strong>Días 20–21: Hong Kong</strong><br>
+                🚄 Guilin → Hong Kong 3–3.5h. <strong>Victoria Peak</strong>, templos, <strong>Star Ferry</strong>.
+            </div>
+        </div>
+    </details>
+    
+    <div class="info-box">
+        <strong>📌 Nota:</strong> Estos itinerarios son flexibles. Los estudiantes pueden agregar o quitar destinos según sus intereses. Por ejemplo, quienes amen la naturaleza pueden añadir Zhangjiajie (2–3 días) o las Montañas Arcoíris de Zhangye (medio día). Quienes prefieran historia pueden incluir Luoyang (Longmen + Shaolin, 2 días).
+    </div>
+</section>
+
+<!-- MAPA -->
+<section id="mapa">
+    <h2>🗺️ Mapa de Puntos de Interés</h2>
+    <p>A continuación se muestra la ubicación de todos los destinos incluidos en esta guía, distribuidos por toda China.</p>
+    
+    <div class="map-container">
+        <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" style="background: #e8f4f8; border-radius: 12px; border: 2px solid #ccc;">
+            <!-- China outline (simplified) -->
+            <path d="M180,180 L220,140 L280,120 L340,100 L400,90 L460,95 L520,110 L580,100 L640,120 L700,140 L740,170 L760,210 L780,260 L790,310 L780,360 L770,400 L750,440 L720,470 L690,500 L650,530 L610,550 L570,560 L530,570 L490,580 L450,590 L410,580 L370,560 L340,540 L310,510 L280,480 L250,440 L230,400 L210,360 L190,320 L180,280 L175,240 L180,180 Z" 
+                  fill="#f5f0e8" stroke="#8B4513" stroke-width="2" opacity="0.8"/>
+            
+            <!-- Province borders (simplified decorative) -->
+            <path d="M400,200 L500,250 L550,350 L450,400 L350,350 Z" fill="none" stroke="#d4c5a9" stroke-width="0.5" stroke-dasharray="3,3"/>
+            
+            <!-- CITY MARKERS (Red dots) -->
+            <!-- Beijing -->
+            <circle cx="590" cy="195" r="8" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="605" y="192" font-size="11" font-weight="bold" fill="#2C2C2C">Pekín</text>
+            
+            <!-- Shanghai -->
+            <circle cx="670" cy="340" r="8" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="685" y="337" font-size="11" font-weight="bold" fill="#2C2C2C">Shanghái</text>
+            
+            <!-- Xi'an -->
+            <circle cx="480" cy="280" r="8" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="495" y="277" font-size="11" font-weight="bold" fill="#2C2C2C">Xi'an</text>
+            
+            <!-- Chengdu -->
+            <circle cx="410" cy="350" r="8" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="425" y="347" font-size="11" font-weight="bold" fill="#2C2C2C">Chengdú</text>
+            
+            <!-- Hong Kong -->
+            <circle cx="580" cy="500" r="8" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="595" y="497" font-size="11" font-weight="bold" fill="#2C2C2C">Hong Kong</text>
+            
+            <!-- Guangzhou -->
+            <circle cx="560" cy="480" r="7" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="575" y="477" font-size="10" fill="#2C2C2C">Guangzhou</text>
+            
+            <!-- Guilin -->
+            <circle cx="500" cy="450" r="7" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="515" y="447" font-size="10" fill="#2C2C2C">Guilin</text>
+            
+            <!-- Hangzhou -->
+            <circle cx="660" cy="360" r="7" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="675" y="357" font-size="10" fill="#2C2C2C">Hangzhou</text>
+            
+            <!-- Kunming -->
+            <circle cx="380" cy="450" r="7" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="395" y="447" font-size="10" fill="#2C2C2C">Kunming</text>
+            
+            <!-- Nanjing -->
+            <circle cx="640" cy="310" r="7" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="655" y="307" font-size="10" fill="#2C2C2C">Nanjing</text>
+            
+            <!-- Datong -->
+            <circle cx="540" cy="185" r="6" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="555" y="182" font-size="9" fill="#2C2C2C">Datong</text>
+            
+            <!-- Luoyang -->
+            <circle cx="530" cy="270" r="6" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="545" y="267" font-size="9" fill="#2C2C2C">Luoyang</text>
+            
+            <!-- Lijiang -->
+            <circle cx="340" cy="410" r="6" fill="#C41E3A" stroke="white" stroke-width="2"/>
+            <text x="310" y="420" font-size="9" fill="#2C2C2C">Lijiang</text>
+            
+            <!-- NATURAL SITES (Green triangles) -->
+            <!-- Zhangjiajie -->
+            <polygon points="490,400 495,390 500,400" fill="#2e7d32" stroke="white" stroke-width="1.5"/>
+            <text x="505" y="400" font-size="9" fill="#2e7d32" font-style="italic">Zhangjiajie</text>
+            
+            <!-- Jiuzhaigou -->
+            <polygon points="375,310 380,300 385,310" fill="#2e7d32" stroke="white" stroke-width="1.5"/>
+            <text x="390" y="310" font-size="9" fill="#2e7d32" font-style="italic">Jiuzhaigou</text>
+            
+            <!-- Huangshan -->
+            <polygon points="635,330 640,320 645,330" fill="#2e7d32" stroke="white" stroke-width="1.5"/>
+            <text x="620" y="340" font-size="9" fill="#2e7d32" font-style="italic">Huangshan</text>
+            
+            <!-- Tiger Leaping Gorge -->
+            <polygon points="330,395 335,385 340,395" fill="#2e7d32" stroke="white" stroke-width="1.5"/>
+            <text x="280" y="390" font-size="8" fill="#2e7d32" font-style="italic">Garganta Tigre</text>
+            
+            <!-- Zhangye Danxia -->
+            <polygon points="330,230 335,220 340,230" fill="#2e7d32" stroke="white" stroke-width="1.5"/>
+            <text x="280" y="235" font-size="8" fill="#2e7d32" font-style="italic">Zhangye Danxia</text>
+            
+            <!-- BUDDHIST SITES (Gold diamonds) -->
+            <!-- Dunhuang/Mogao -->
+            <rect x="270" y="195" width="10" height="10" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 275, 200)"/>
+            <text x="255" y="215" font-size="9" fill="#8B6914" font-weight="bold">Dunhuang</text>
+            <text x="255" y="225" font-size="8" fill="#8B6914">(Mogao)</text>
+            
+            <!-- Leshan -->
+            <rect x="415" y="370" width="9" height="9" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 420, 375)"/>
+            <text x="430" y="378" font-size="8" fill="#8B6914">Leshan</text>
+            
+            <!-- Mount Emei -->
+            <polygon points="405,385 410,375 415,385" fill="#D4AF37" stroke="white" stroke-width="1.5"/>
+            <text x="418" y="390" font-size="8" fill="#8B6914">Mt. Emei</text>
+            
+            <!-- Lhasa/Potala -->
+            <rect x="250" y="340" width="10" height="10" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 255, 345)"/>
+            <text x="230" y="360" font-size="9" fill="#8B6914" font-weight="bold">Lhasa</text>
+            
+            <!-- Great Wall (near Beijing) -->
+            <rect x="570" y="175" width="8" height="8" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 574, 179)"/>
+            <text x="545" y="172" font-size="8" fill="#8B6914">Muralla China</text>
+            
+            <!-- Longmen/Shaolin near Luoyang -->
+            <rect x="535" y="280" width="8" height="8" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 539, 284)"/>
+            <text x="548" y="290" font-size="8" fill="#8B6914">Longmen/Shaolin</text>
+            
+            <!-- Hanging Temple near Datong -->
+            <rect x="555" y="175" width="7" height="7" fill="#D4AF37" stroke="white" stroke-width="1.5" transform="rotate(45, 558, 178)"/>
+            
+            <!-- Decorative compass -->
+            <g transform="translate(820, 620)">
+                <circle cx="0" cy="0" r="25" fill="white" stroke="#8B4513" stroke-width="1.5"/>
+                <text x="-4" y="-12" font-size="10" font-weight="bold" fill="#C41E3A">N</text>
+                <text x="-3" y="18" font-size="8" fill="#555">S</text>
+                <text x="12" y="4" font-size="8" fill="#555">E</text>
+                <text x="-18" y="4" font-size="8" fill="#555">O</text>
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#C41E3A" stroke-width="1.5"/>
+                <line x1="-8" y1="0" x2="8" y2="0" stroke="#555" stroke-width="1"/>
+            </g>
+            
+            <!-- Title -->
+            <text x="450" y="50" font-size="18" font-weight="bold" fill="#232f3e" text-anchor="middle">Mapa de Destinos Turísticos — China</text>
+            <text x="450" y="70" font-size="11" fill="#666" text-anchor="middle">20+ puntos de interés para estudiantes</text>
+        </svg>
+    </div>
+    
+    <div class="map-legend">
+        <div class="legend-item">
+            <div class="legend-dot" style="background: #C41E3A;"></div>
+            <span>Ciudades principales</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot" style="background: #2e7d32;"></div>
+            <span>Parques naturales</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot" style="background: #D4AF37;"></div>
+            <span>Sitios budistas/históricos</span>
+        </div>
+    </div>
+    
+    <h3>Lista Completa de Destinos en el Mapa</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Destino</th>
+                <th>Tipo</th>
+                <th>Días recomendados</th>
+                <th>Región</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Pekín (Beijing)</td><td>🏙️ Ciudad</td><td>3–4</td><td>Norte</td></tr>
+            <tr><td>2</td><td>Shanghái</td><td>🏙️ Ciudad</td><td>2–3</td><td>Este</td></tr>
+            <tr><td>3</td><td>Xi'an</td><td>🏙️ Ciudad</td><td>2–3</td><td>Centro</td></tr>
+            <tr><td>4</td><td>Chengdú</td><td>🏙️ Ciudad</td><td>2–3</td><td>Suroeste</td></tr>
+            <tr><td>5</td><td>Hong Kong</td><td>🏙️ Ciudad</td><td>2–3</td><td>Sur</td></tr>
+            <tr><td>6</td><td>Guangzhou</td><td>🏙️ Ciudad</td><td>1–2</td><td>Sur</td></tr>
+            <tr><td>7</td><td>Guilin / Yangshuo</td><td>🏙️🌿 Ciudad + Naturaleza</td><td>3</td><td>Sur</td></tr>
+            <tr><td>8</td><td>Hangzhou</td><td>🏙️ Ciudad</td><td>2–3</td><td>Este</td></tr>
+            <tr><td>9</td><td>Kunming</td><td>🏙️ Ciudad</td><td>2–3</td><td>Suroeste</td></tr>
+            <tr><td>10</td><td>Nanjing</td><td>🏙️ Ciudad</td><td>2</td><td>Este</td></tr>
+            <tr><td>11</td><td>Lhasa</td><td>🏙️🛕 Ciudad + Espiritual</td><td>3–4</td><td>Tíbet</td></tr>
+            <tr><td>12</td><td>Datong</td><td>🏙️ Ciudad</td><td>1 (excursión)</td><td>Norte</td></tr>
+            <tr><td>13</td><td>Luoyang</td><td>🏙️ Ciudad</td><td>2</td><td>Centro</td></tr>
+            <tr><td>14</td><td>Lijiang</td><td>🏙️ Ciudad</td><td>2–3</td><td>Suroeste</td></tr>
+            <tr><td>15</td><td>Gran Muralla China</td><td>🧱 Monumento</td><td>1</td><td>Norte (Pekín)</td></tr>
+            <tr><td>16</td><td>Cuevas de Mogao (Dunhuang)</td><td>🛕 Budista</td><td>2–3</td><td>Noroeste (Gobi)</td></tr>
+            <tr><td>17</td><td>Buda Gigante de Leshan</td><td>🛕 Budista</td><td>1</td><td>Suroeste</td></tr>
+            <tr><td>18</td><td>Monte Emei</td><td>🛕🌿 Budista + Natural</td><td>2</td><td>Suroeste</td></tr>
+            <tr><td>19</td><td>Grutas de Longmen</td><td>🛕 Budista</td><td>½</td><td>Centro</td></tr>
+            <tr><td>20</td><td>Templo Shaolin</td><td>🛕 Budista</td><td>½–1</td><td>Centro</td></tr>
+            <tr><td>21</td><td>Templo Colgante + Yungang</td><td>🛕 Budista</td><td>1</td><td>Norte</td></tr>
+            <tr><td>22</td><td>Palacio Potala</td><td>🛕 Budista</td><td>2–3</td><td>Tíbet</td></tr>
+            <tr><td>23</td><td>Zhangjiajie</td><td>🌿 Natural</td><td>2–3</td><td>Centro-Sur</td></tr>
+            <tr><td>24</td><td>Valle de Jiuzhaigou</td><td>🌿 Natural</td><td>1–2</td><td>Suroeste</td></tr>
+            <tr><td>25</td><td>Garganta del Salto del Tigre</td><td>🌿 Natural</td><td>2</td><td>Suroeste</td></tr>
+            <tr><td>26</td><td>Huangshan</td><td>🌿 Natural</td><td>1–2</td><td>Este</td></tr>
+            <tr><td>27</td><td>Montañas Arcoíris Zhangye</td><td>🌿 Natural</td><td>½</td><td>Noroeste</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- RESUMEN FINAL -->
+<section>
+    <h2>✨ Conclusión</h2>
+    <p>China ofrece una diversidad extraordinaria de experiencias educativas y culturales. Con más de 27 destinos incluidos en esta guía, los estudiantes tienen la libertad de diseñar su propio viaje según sus intereses: historia antigua, budismo, naturaleza espectacular o metrópolis modernas.</p>
+    
+    <div class="info-box">
+        <strong>Puntos clave para recordar:</strong>
+        <ul>
+            <li>China es un destino de <strong>bajo riesgo</strong> para viajeros con precauciones estándar <span class="citation"><a href="#ref-2" class="citation">[2]</a></span></li>
+            <li>Entrada sin visa hasta 30 días para 50 países hasta diciembre 2026 <span class="citation"><a href="#ref-5" class="citation">[5]</a></span></li>
+            <li>La red de trenes de alta velocidad conecta la mayoría de destinos en 1–6 horas</li>
+            <li>Mejor época: abril, mayo, septiembre y octubre <span class="citation"><a href="#ref-4" class="citation">[4]</a></span></li>
+            <li>WeChat Pay y Alipay aceptan tarjetas internacionales <span class="citation"><a href="#ref-7" class="citation">[7]</a></span></li>
+            <li>Descargar VPN antes de viajar <span class="citation"><a href="#ref-10" class="citation">[10]</a></span></li>
+        </ul>
+    </div>
+    
+    <p style="text-align: center; font-size: 1.2em; color: var(--chinese-red); margin-top: 20px;">
+        <strong>¡Buen viaje! 祝你旅途愉快！</strong>
+    </p>
+</section>
+
+
+<section class="references" style="margin-top:2em;padding-top:1em;border-top:1px solid #ccc;color:inherit;">
+<h2 style="font-size:1.1em;margin-bottom:0.5em;">References</h2>
+<ol style="padding-left:2em;font-size:0.9em;line-height:1.6;">
+<li id="ref-1"><a href="https://www.travelchinaguide.com/tour/famous-cities-for-students.htm?srsltid=AfmBOorK2PgAdieJLoJozV-1DQDREM2mza8cEDtdlt5zAnN4VKGHCSa-" style="color:#0073bb;word-break:break-all;">https://www.travelchinaguide.com/tour/famous-cities-for-students.htm?srsltid=AfmBOorK2PgAdieJLoJozV-1DQDREM2mza8cEDtdlt5zAnN4VKGHCSa-</a></li>
+<li id="ref-2"><a href="https://business.columbia.edu/sites/default/files-efs/imce-uploads/Chazen/study-tours/AY25-26/Updated%20Safety%20and%20Security%20Considerations%20for%20China.pdf" style="color:#0073bb;word-break:break-all;">https://business.columbia.edu/sites/default/files-efs/imce-uploads/Chazen/study-tours/AY25-26/Updated%20Safety%20and%20Security%20Considerations%20for%20China.pdf</a></li>
+<li id="ref-3"><a href="https://www.gov.uk/foreign-travel-advice/china/safety-and-security?" style="color:#0073bb;word-break:break-all;">https://www.gov.uk/foreign-travel-advice/china/safety-and-security?</a></li>
+<li id="ref-4"><a href="https://www.chinahighlights.com/weather/china-best-times.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/weather/china-best-times.htm</a></li>
+<li id="ref-5"><a href="https://english.www.gov.cn/news/202511/04/content_WS69094ae0c6d00ca5f9a07472.html" style="color:#0073bb;word-break:break-all;">https://english.www.gov.cn/news/202511/04/content_WS69094ae0c6d00ca5f9a07472.html</a></li>
+<li id="ref-6"><a href="https://vancouver.china-consulate.gov.cn/eng/lsfw/qz/202606/t20260612_11943069.htm" style="color:#0073bb;word-break:break-all;">https://vancouver.china-consulate.gov.cn/eng/lsfw/qz/202606/t20260612_11943069.htm</a></li>
+<li id="ref-7"><a href="https://wildchina.com/2026/05/wechat-pay-in-2026/" style="color:#0073bb;word-break:break-all;">https://wildchina.com/2026/05/wechat-pay-in-2026/</a></li>
+<li id="ref-8"><a href="https://www.you.co/sg/blog/how-to-use-alipay-in-china/?" style="color:#0073bb;word-break:break-all;">https://www.you.co/sg/blog/how-to-use-alipay-in-china/?</a></li>
+<li id="ref-9"><a href="https://gizmodo.com/best-vpn/access-facebook-china" style="color:#0073bb;word-break:break-all;">https://gizmodo.com/best-vpn/access-facebook-china</a></li>
+<li id="ref-10"><a href="https://global.umn.edu/travel/technology/china" style="color:#0073bb;word-break:break-all;">https://global.umn.edu/travel/technology/china</a></li>
+<li id="ref-11"><a href="https://travel.gc.ca/destinations/china" style="color:#0073bb;word-break:break-all;">https://travel.gc.ca/destinations/china</a></li>
+<li id="ref-12"><a href="https://www.chinadiscovery.com/china-flights/schedules/beijing-dunhuang-flights.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/china-flights/schedules/beijing-dunhuang-flights.html</a></li>
+<li id="ref-13"><a href="https://www.getyourguide.com/beijing-l186/beijing-hanging-templeyungang-grottoes-by-bullet-train-t727626/" style="color:#0073bb;word-break:break-all;">https://www.getyourguide.com/beijing-l186/beijing-hanging-templeyungang-grottoes-by-bullet-train-t727626/</a></li>
+<li id="ref-14"><a href="https://www.trainspread.com/china-trains/xian-chengdu-trains" style="color:#0073bb;word-break:break-all;">https://www.trainspread.com/china-trains/xian-chengdu-trains</a></li>
+<li id="ref-15"><a href="https://www.rome2rio.com/s/Xi-an-Station/Terracotta-Warriors" style="color:#0073bb;word-break:break-all;">https://www.rome2rio.com/s/Xi-an-Station/Terracotta-Warriors</a></li>
+<li id="ref-16"><a href="https://www.klook.com/en-US/china-high-speed-rail/" style="color:#0073bb;word-break:break-all;">https://www.klook.com/en-US/china-high-speed-rail/</a></li>
+<li id="ref-17"><a href="https://www.chinadiscovery.com/china-trains/maps/guilin-railway-map.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/china-trains/maps/guilin-railway-map.html</a></li>
+<li id="ref-18"><a href="Source: wikipedia.org" style="color:#0073bb;word-break:break-all;">Source: wikipedia.org</a></li>
+<li id="ref-19"><a href="https://www.travelchinaguide.com/leshan-to-chengdu-trains.htm" style="color:#0073bb;word-break:break-all;">https://www.travelchinaguide.com/leshan-to-chengdu-trains.htm</a></li>
+<li id="ref-20"><a href="https://www.wanderinchina.com/destinations/jiuzhaigou/transport/" style="color:#0073bb;word-break:break-all;">https://www.wanderinchina.com/destinations/jiuzhaigou/transport/</a></li>
+<li id="ref-21"><a href="https://www.lonelyplanet.com/articles/best-places-to-visit-in-china" style="color:#0073bb;word-break:break-all;">https://www.lonelyplanet.com/articles/best-places-to-visit-in-china</a></li>
+<li id="ref-22"><a href="https://www.chinahighlights.com/guilin/article-3-day-tour.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/guilin/article-3-day-tour.htm</a></li>
+<li id="ref-23"><a href="https://www.chinahighlights.com/plan/trip-to-guilin-and-yunnan.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/plan/trip-to-guilin-and-yunnan.htm</a></li>
+<li id="ref-24"><a href="https://www.chinaodysseytours.com/knows/badaling-great-wall-badaling-remnant-great-wall.html" style="color:#0073bb;word-break:break-all;">https://www.chinaodysseytours.com/knows/badaling-great-wall-badaling-remnant-great-wall.html</a></li>
+<li id="ref-25"><a href="https://www.rome2rio.com/s/Beijing/Mutianyu-Great-Wall?" style="color:#0073bb;word-break:break-all;">https://www.rome2rio.com/s/Beijing/Mutianyu-Great-Wall?</a></li>
+<li id="ref-26"><a href="http://www.topchinatravel.com/great-wall-of-china/how-to-get-from-beijing-to-the-great-wall-of-china.htm" style="color:#0073bb;word-break:break-all;">http://www.topchinatravel.com/great-wall-of-china/how-to-get-from-beijing-to-the-great-wall-of-china.htm</a></li>
+<li id="ref-27"><a href="https://www.chinadiscovery.com/beijing-dunhuang-tours/travel-from-beijing-to-dunhuang.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/beijing-dunhuang-tours/travel-from-beijing-to-dunhuang.html</a></li>
+<li id="ref-28"><a href="https://www.rome2rio.com/s/Xi-an/Mogao-Caves" style="color:#0073bb;word-break:break-all;">https://www.rome2rio.com/s/Xi-an/Mogao-Caves</a></li>
+<li id="ref-29"><a href="https://www.chinadiscovery.com/dunhuang-tours/transportation.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/dunhuang-tours/transportation.html</a></li>
+<li id="ref-30"><a href="https://www.chinadiscovery.com/gansu/dunhuang/mogao-caves/dunhuang-city-to-mogao-caves.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/gansu/dunhuang/mogao-caves/dunhuang-city-to-mogao-caves.html</a></li>
+<li id="ref-31"><a href="https://www.rome2rio.com/s/Chengdu-South-Station/Leshan-Station-Bus-Stop" style="color:#0073bb;word-break:break-all;">https://www.rome2rio.com/s/Chengdu-South-Station/Leshan-Station-Bus-Stop</a></li>
+<li id="ref-32"><a href="https://www.rome2rio.com/s/Chengdu/Leshan-Giant-Buddha" style="color:#0073bb;word-break:break-all;">https://www.rome2rio.com/s/Chengdu/Leshan-Giant-Buddha</a></li>
+<li id="ref-33"><a href="https://www.chinadiscovery.com/china-trains/schedules/leshan-to-emeishan-trains.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/china-trains/schedules/leshan-to-emeishan-trains.html</a></li>
+<li id="ref-34"><a href="https://www.chinadiscovery.com/shanxi/datong/hanging-temple.html" style="color:#0073bb;word-break:break-all;">https://www.chinadiscovery.com/shanxi/datong/hanging-temple.html</a></li>
+<li id="ref-35"><a href="https://www.chinahighlights.com/datong/attraction/hanging-monastery.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/datong/attraction/hanging-monastery.htm</a></li>
+<li id="ref-36"><a href="https://www.chinahighlights.com/zhangjiajie/where-to-stay-in-zhangjiajie.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/zhangjiajie/where-to-stay-in-zhangjiajie.htm</a></li>
+<li id="ref-37"><a href="https://windhorsetour.com/china-travel-tips/zhangjiajie-travel-guide" style="color:#0073bb;word-break:break-all;">https://windhorsetour.com/china-travel-tips/zhangjiajie-travel-guide</a></li>
+<li id="ref-38"><a href="https://www.guilinchina.net/yangshuo-travel-guide" style="color:#0073bb;word-break:break-all;">https://www.guilinchina.net/yangshuo-travel-guide</a></li>
+<li id="ref-39"><a href="https://www.chinahighlights.com/yangshuo/weather.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/yangshuo/weather.htm</a></li>
+<li id="ref-40"><a href="https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm</a></li>
+<li id="ref-41"><a href="https://www.easytourchina.com/idea-v415-hiking-along-tiger-leaping-gorge" style="color:#0073bb;word-break:break-all;">https://www.easytourchina.com/idea-v415-hiking-along-tiger-leaping-gorge</a></li>
+<li id="ref-42"><a href="https://www.chinahighlights.com/huangshan/best-time-to-visit.htm" style="color:#0073bb;word-break:break-all;">https://www.chinahighlights.com/huangshan/best-time-to-visit.htm</a></li>
+<li id="ref-43"><a href="https://www.travelchengdu.com/blog/how-to-plan-a-trip-to-zhangye" style="color:#0073bb;word-break:break-all;">https://www.travelchengdu.com/blog/how-to-plan-a-trip-to-zhangye</a></li>
+<li id="ref-44"><a href="https://www.booking.com/landmark/cn/zhangye-danxia-national-geological-park.html" style="color:#0073bb;word-break:break-all;">https://www.booking.com/landmark/cn/zhangye-danxia-national-geological-park.html</a></li>
+<li id="ref-45"><a href="https://windhorsetour.com/china-attraction/zhangye-rainbow-mountain" style="color:#0073bb;word-break:break-all;">https://windhorsetour.com/china-attraction/zhangye-rainbow-mountain</a></li>
+<li id="ref-46"><a href="https://www.fabionodariphoto.com/en/rainbow-mountains-china-travel-guide-zhangye/" style="color:#0073bb;word-break:break-all;">https://www.fabionodariphoto.com/en/rainbow-mountains-china-travel-guide-zhangye/</a></li>
+<li id="ref-47"><a href="https://travelchinaguide.com/china-trains/shanghai-guilin.htm" style="color:#0073bb;word-break:break-all;">https://travelchinaguide.com/china-trains/shanghai-guilin.htm</a></li>
+</ol>
+</section>
+</main>
+
+<footer style="background: var(--dark-bg); color: white; text-align: center; padding: 30px; margin-top: 40px;">
+    <p>Itinerario Turístico por China — Guía Educativa para Estudiantes</p>
+    <p style="opacity: 0.7; font-size: 0.85em; margin-top: 10px;">Información recopilada de fuentes verificadas. Precios y horarios sujetos a cambios. Verificar siempre antes de viajar.</p>
+</footer>
+
+</body>
+</html>
